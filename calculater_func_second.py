@@ -15,12 +15,3 @@ class second_function:
     def raiz2(self):
         raiz2 = (-self.b + second_function.delta(self)**(1/2))/(2*self.a)
         return raiz2
-
-funcao = second_function(-1,4,-3)
-delta = funcao.delta()
-raiz1 = funcao.raiz1()
-raiz2 = funcao.raiz2()
-
-print(f"delta ={delta}")
-print(f"raiz1 ={raiz1}")
-print(f"raiz2 ={raiz2}")

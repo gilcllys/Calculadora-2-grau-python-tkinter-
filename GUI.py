@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-
+from calculater_func_second import second_function
 
 
 #criando instâncias
@@ -13,6 +13,15 @@ win.geometry('300x500')
 win.title("Calculadora de raízes")
 
 # funções de callback dos botões
+def calcular():
+    #instancia da classe de segundo grau
+    app = second_function(coefA.get(),coefB.get(),coefC.get())
+    r1 = app.raiz1()
+    r2 = app.raiz2()
+    raiz1.configure(text=str(r1))
+    raiz2.configure(text=str(r2))
+
+    
 
 #Componentes
 #Exemplo da equação de segundo grau
@@ -26,22 +35,38 @@ coefA = tk.DoubleVar()
 coefB = tk.DoubleVar()
 coefC = tk.DoubleVar()
 
+
 #Label das entradas
 #Container dos coeficientes
-coeficientes = ttk.LabelFrame(win,text="Valores dos coeficientes")
-coeficientes.grid(column=0,row=3)
+coeficientes = ttk.LabelFrame(win,text="Valores dos coeficientes",borderwidth=1,relief="solid")
+coeficientes.grid(column=0,row=2)
 #Coeficiente A
-ttk.Label(coeficientes,text="Coeficiente A:").grid(column=0,row=0)
+ttk.Label(coeficientes,text="Coeficiente A:").grid(column=0,row=0,padx=10)
 cfA = ttk.Entry(coeficientes,width=12,textvariable=coefA)
 cfA.grid(column=1,row=0)
 #Coeficiente B
 ttk.Label(coeficientes,text="Coeficiente B:").grid(column=0,row=1)
-cfA = ttk.Entry(coeficientes,width=12,textvariable=coefA)
-cfA.grid(column=1,row=1,)
+cfB = ttk.Entry(coeficientes,width=12,textvariable=coefB)
+cfB.grid(column=1,row=1,padx=5,pady=5)
 #Coeficiente C
 ttk.Label(coeficientes,text="Coeficiente C:").grid(column=0,row=2)
-cfA = ttk.Entry(coeficientes,width=12,textvariable=coefA)
-cfA.grid(column=1,row=2)
+cfC = ttk.Entry(coeficientes,width=12,textvariable=coefC)
+cfC.grid(column=1,row=2)
+
+#botão 
+ttk.Button(win,text="Calcular",command=calcular).grid(column=0,row=3,pady=25)
+
+#raizes
+raizes = ttk.LabelFrame(win,text="Valores das raízes")
+raizes.grid(column=0,row=4,pady=5)
+#raiz1
+ttk.Label(raizes, text="R1:",foreground="Green").grid(column=0,row=0,padx=10)
+raiz1 = ttk.Label(raizes, text="***",foreground="Green")
+raiz1.grid(column=1,row=0,padx=5)
+#raiz2
+ttk.Label(raizes, text="R2:",foreground="Green").grid(column=0,row=1)
+raiz2 = ttk.Label(raizes, text="***",foreground="Green")
+raiz2.grid(column=1,row=1)
 
 
 #iniciando a GUI 
