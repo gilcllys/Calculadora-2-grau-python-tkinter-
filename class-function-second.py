@@ -1,4 +1,3 @@
-
 class second_function:
     def __init__(self,A,B,C):
         self.a = float(A)
@@ -17,7 +16,7 @@ class second_function:
         raiz2 = (-self.b + second_function.delta(self)**(1/2))/(2*self.a)
         return raiz2
 
-funcao = second_function(1,-6,8)
+funcao = second_function(-1,4,-3)
 delta = funcao.delta()
 raiz1 = funcao.raiz1()
 raiz2 = funcao.raiz2()
