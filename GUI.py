@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import Label, PhotoImage, ttk
+from tkinter import PhotoImage, ttk
 from calculater_func_second import second_function
 import os
 
@@ -17,9 +17,6 @@ win.title("Calculadora de raízes")
 
 # funções de callback dos botões
 def calcular():
-    #caminho das imagens
-    baixo = PhotoImage(file=pastcalc+"\\imagens/concavidade-para-baixo.gif")
-    cima = PhotoImage(file=pastcalc+"\\imagens/concavidade-para-cima.gif")
     #instancia da classe de segundo grau
     app = second_function(coefA.get(),coefB.get(),coefC.get())
     r1 = app.raiz1()
@@ -27,11 +24,18 @@ def calcular():
     if coefA.get() > 0:
         raiz1.configure(text=str(r1))
         raiz2.configure(text=str(r2))
-
+        resultadosConcavidades.configure(image=cima)
+    else:
+        raiz1.configure(text=str(r1))
+        raiz2.configure(text=str(r2))
+        resultadosConcavidades.configure(image=baixo)
+        
 
 def reset():
     raiz1.configure(text="***")
     raiz2.configure(text="***")
+    resultadosConcavidades.configure(image=vazio)
+    
 
     
 
@@ -86,11 +90,14 @@ raiz2 = ttk.Label(raizes, text="***",foreground="Green")
 raiz2.grid(column=1,row=1)
 
 #imagens
+#caminho das imagens
+baixo = PhotoImage(file=pastcalc+"\\imagens/concavidade-para-baixo.gif")
+cima = PhotoImage(file=pastcalc+"\\imagens/concavidade-para-cima.gif")
+vazio = tk.PhotoImage(file=pastcalc+"\\imagens/empty_state.gif")
 convavidade= ttk.LabelFrame(win,text="Concavidade da Curva")
 convavidade.grid(column=0,row=6,padx=30)
-
-Status = PhotoImage(file=pastcalc+"\\imagens/empty_state.gif")
-img_label = ttk.Label(convavidade,image=Status).pack()
+resultadosConcavidades = ttk.Label(convavidade,image=vazio)
+resultadosConcavidades.grid(column=0,row=0)
 #iniciando a GUI 
 win.mainloop()
 
