@@ -1,12 +1,15 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import Label, PhotoImage, ttk
 from calculater_func_second import second_function
+import os
 
+pastcalc = os.path.dirname(__file__)
 
 #criando instâncias
 win = tk.Tk()
 win.resizable(False,False)
-win.geometry('300x500')
+win.geometry('400x600')
+win.iconbitmap(r"imagens/icon.ico")
 
 
 # adicionando título da GUI
@@ -14,12 +17,21 @@ win.title("Calculadora de raízes")
 
 # funções de callback dos botões
 def calcular():
+    #caminho das imagens
+    baixo = PhotoImage(file=pastcalc+"\\imagens/concavidade-para-baixo.gif")
+    cima = PhotoImage(file=pastcalc+"\\imagens/concavidade-para-cima.gif")
     #instancia da classe de segundo grau
     app = second_function(coefA.get(),coefB.get(),coefC.get())
     r1 = app.raiz1()
     r2 = app.raiz2()
-    raiz1.configure(text=str(r1))
-    raiz2.configure(text=str(r2))
+    if coefA.get() > 0:
+        raiz1.configure(text=str(r1))
+        raiz2.configure(text=str(r2))
+
+
+def reset():
+    raiz1.configure(text="***")
+    raiz2.configure(text="***")
 
     
 
@@ -53,12 +65,17 @@ ttk.Label(coeficientes,text="Coeficiente C:").grid(column=0,row=2)
 cfC = ttk.Entry(coeficientes,width=12,textvariable=coefC)
 cfC.grid(column=1,row=2)
 
-#botão 
-ttk.Button(win,text="Calcular",command=calcular).grid(column=0,row=3,pady=25)
+
+#BOTÕES
+#Calcular
+ttk.Button(win,text="Calcular",command=calcular).grid(column=0,row=3,pady=10)
+#reset
+ttk.Button(win,text="Reset",command=reset).grid(column=0,row=4)
+
 
 #raizes
 raizes = ttk.LabelFrame(win,text="Valores das raízes")
-raizes.grid(column=0,row=4,pady=5)
+raizes.grid(column=0,row=5,pady=5)
 #raiz1
 ttk.Label(raizes, text="R1:",foreground="Green").grid(column=0,row=0,padx=10)
 raiz1 = ttk.Label(raizes, text="***",foreground="Green")
@@ -68,7 +85,12 @@ ttk.Label(raizes, text="R2:",foreground="Green").grid(column=0,row=1)
 raiz2 = ttk.Label(raizes, text="***",foreground="Green")
 raiz2.grid(column=1,row=1)
 
+#imagens
+convavidade= ttk.LabelFrame(win,text="Concavidade da Curva")
+convavidade.grid(column=0,row=6,padx=30)
 
+Status = PhotoImage(file=pastcalc+"\\imagens/empty_state.gif")
+img_label = ttk.Label(convavidade,image=Status).pack()
 #iniciando a GUI 
 win.mainloop()
 
